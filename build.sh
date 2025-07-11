@@ -46,10 +46,10 @@ declare -r optflags='-w -O2'
 declare -r linkflags='-Xlinker -s'
 
 declare -ra targets=(
-	'riscv64-unknown-linux-android'
-	'x86_64-unknown-linux-android'
-	'i686-unknown-linux-android'
-	'arm-unknown-linux-androideabi'
+	# 'riscv64-unknown-linux-android'
+	# 'x86_64-unknown-linux-android'
+	# 'i686-unknown-linux-android'
+	# 'arm-unknown-linux-androideabi'
 	'aarch64-unknown-linux-android'
 )
 
@@ -128,6 +128,10 @@ declare -ra bits=(
 	''
 	'64'
 )
+
+declare -r PKG_CONFIG_PATH="${toolchain_directory}/lib/pkgconfig"
+
+export PKG_CONFIG_PATH
 
 export \
 	ac_cv_func_aligned_alloc=no \
