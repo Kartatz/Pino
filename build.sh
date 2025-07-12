@@ -558,6 +558,7 @@ for triplet in "${targets[@]}"; do
 		--enable-compressed-debug-sections='all' \
 		--enable-default-compressed-debug-sections-algorithm='zstd' \
 		--disable-gprofng \
+		--disable-default-execstack \
 		--without-static-standard-libraries \
 		--with-sysroot="${toolchain_directory}/${triplet}" \
 		--with-zstd="${toolchain_directory}" \
@@ -718,10 +719,10 @@ for triplet in "${targets[@]}"; do
 	if (( is_native )); then
 		args+="${environment}"
 	fi
-	#-fuse-ld=gold 
+	
 	env ${args} make \
 		CFLAGS_FOR_TARGET="-D __ANDROID_API__=${base_version} ${optflags} ${linkflags}" \
-		CXXFLAGS_FOR_TARGET="-D __ANDROID_API__=${base_version} ${optflags} ${linkflags}" \
+		CXXFLAGS_FOR_TARGET="-fuse-ld=gold -D __ANDROID_API__=${base_version} ${optflags} ${linkflags}" \
 		gcc_cv_objdump="${CROSS_COMPILE_TRIPLET}-objdump" \
 		all --jobs="${max_jobs}"
 	make install
