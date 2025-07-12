@@ -743,6 +743,8 @@ for triplet in "${targets[@]}"; do
 	
 	cd "${toolchain_directory}/${triplet}/lib64" 2>/dev/null || cd "${toolchain_directory}/${triplet}/lib"
 	
+	[ -f './libiberty.a' ] && unlink './libiberty.a'
+	
 	if ! (( is_native )); then
 		ln --symbolic './libestdc++.so' './libstdc++.so'
 		ln --symbolic './libestdc++.a' './libstdc++.a'
