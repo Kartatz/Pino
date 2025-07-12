@@ -629,7 +629,7 @@ for triplet in "${targets[@]}"; do
 		patch --directory="${toolchain_directory}/${triplet}" --strip='1' --input="${workdir}/patches/0001-Match-the-NDK-sigcontext-struct-with-glibc-s.patch"
 	fi
 	
-	if (( is_native )); then
+	if (( 0 )); then
 		extra_configure_flags+=' --disable-libsanitizer'
 	else
 		extra_configure_flags+=' --enable-libsanitizer'
@@ -706,7 +706,6 @@ for triplet in "${targets[@]}"; do
 		--disable-bootstrap \
 		--disable-multilib \
 		--disable-symvers \
-		--disable-install-libiberty \
 		--without-headers \
 		--without-static-standard-libraries \
 		${extra_configure_flags} \
