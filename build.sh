@@ -705,6 +705,7 @@ for triplet in "${targets[@]}"; do
 		--disable-bootstrap \
 		--disable-multilib \
 		--disable-symvers \
+		--disable-install-libiberty \
 		--without-headers \
 		--without-static-standard-libraries \
 		${extra_configure_flags} \
@@ -717,10 +718,10 @@ for triplet in "${targets[@]}"; do
 	if (( is_native )); then
 		args+="${environment}"
 	fi
-	
+	#-fuse-ld=gold 
 	env ${args} make \
 		CFLAGS_FOR_TARGET="-D __ANDROID_API__=${base_version} ${optflags} ${linkflags}" \
-		CXXFLAGS_FOR_TARGET="-fuse-ld=gold -D __ANDROID_API__=${base_version} ${optflags} ${linkflags}" \
+		CXXFLAGS_FOR_TARGET="-D __ANDROID_API__=${base_version} ${optflags} ${linkflags}" \
 		gcc_cv_objdump="${CROSS_COMPILE_TRIPLET}-objdump" \
 		all --jobs="${max_jobs}"
 	make install
